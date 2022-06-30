@@ -1,0 +1,35 @@
+﻿@model List<Cart>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Icon</th>
+            <th scope="col">Description1</th>
+            <th scope="col">Description2</th>
+            <th scope="col">Title</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>@item.Icon</td>
+
+            <td>@item.Description1</td>
+            <td>@item.Description2</td>
+            <td>@item.Title</td>
+            <td><a asp-action="Update" asp-controller="Cart" asp-area="Manage" asp-route-Id="@item.Id">Update</a></td>
+            <td><a asp-action="Delete" asp-controller="Cart" asp-area="Manage" asp-route-Id="@item.Id">Delete</a></td>
+
+
+        </tr>
+
+        }
+
+
+    </tbody>
+</table>

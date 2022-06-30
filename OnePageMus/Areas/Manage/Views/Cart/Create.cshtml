@@ -1,0 +1,28 @@
+﻿@model Cart
+@{
+    ViewData["Title"] = "Create";
+}
+<form method="post">
+    <div class="mb-3">
+        <label asp-for="Title"></label>
+        <input asp-for="Title" />
+        <span asp-validation-for="Title"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Description1"></label>
+        <input asp-for="Description1" />
+        <span asp-validation-for="Title"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Description2"></label>
+        <input asp-for="Description2" />
+        <span asp-validation-for="Description2"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Icon"></label>
+        <input asp-for="Icon" />
+        <span asp-validation-for="Icon"></span>
+    </div>
+    <button type="submit" value="create" >Create</button>
+</form>
+
