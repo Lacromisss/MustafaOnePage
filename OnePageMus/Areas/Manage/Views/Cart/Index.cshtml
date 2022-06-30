@@ -1,4 +1,6 @@
-﻿@model List<Cart>
+﻿
+@using OnePageMus.ViewModel
+@model PaginationVm<Cart>
 @{
     ViewData["Title"] = "Index";
 }
@@ -14,7 +16,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.Item)
         {
         <tr>
             <td>@item.Icon</td>
@@ -33,3 +35,32 @@
 
     </tbody>
 </table>
+<nav aria-label="Page navigation example" style="background-color:red ;margin-top:800px;margin-left:50px">
+    <ul class="pagination">
+        @if (Model.ActivPage != 1)
+        {
+            <li class="page-item">
+                <a class="page-link" asp-action="Index" asp-controller="Cart" asp-area="Manage" asp-route-page="@(Model.ActivPage-1)" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+
+        }
+        @for (int i = 1; i < Model.PageCount; i++)
+        {
+            <li class="page-item" @Model.ActivPage==i?"active":"" ><a  asp-action="Index" asp-controller="Cart" asp-area="Manage" asp-route-page="@i" class="page-link">@i</a></li>
+
+
+        }
+        @if (Model.ActivPage < Model.PageCount)
+        {
+            <li class="page-item">
+                <a class="page-link"  asp-action="Index" asp-controller="Cart" asp-area="Manage" asp-route-page="@(Model.ActivPage+1)" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+
+        }
+
+    </ul>
+</nav>

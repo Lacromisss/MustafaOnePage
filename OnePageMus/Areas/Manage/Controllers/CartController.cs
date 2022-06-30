@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore.Internal;
 using OnePageMus.DAL;
 using OnePageMus.Models;
+using OnePageMus.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,11 +20,25 @@ namespace OnePageMus.Areas.Manage.Controllers
             _context = context;
 
         }
-        public IActionResult Index()
+        public IActionResult Index(int page=1)
         {
-            List<Cart> carts = _context.carts.ToList();
-            return View(carts);
+            int pageCount = _context.carts.Count();
+            if (page<1 || page>pageCount)
+            {
+                page = 1;
+            }
+            List<Cart> carts = _context.carts.Skip((page-1)*2).Take(2).ToList();
+            PaginationVm<Cart> paginationVm = new PaginationVm<Cart>
+            {
+                Item = carts,
+                PageCount = pageCount,
+                ActivPage= page
+
+
+            };
+            return View(paginationVm);
         }
+       
         public IActionResult Create()
         {
             return View();

@@ -83,10 +83,17 @@ namespace OnePageMus.Controllers
             if (appUser==null)
             {
                 ModelState.AddModelError("Message", "bos qayidib");
-                return View();
+                return View(loginVm);
 
             }
-            var result = _sign.PasswordSignInAsync(appUser, loginVm.Password, loginVm.RememberMe, true);
+            var Musi = await _sign.PasswordSignInAsync(appUser, loginVm.Password, loginVm.RememberMe, true);
+            if (!Musi.Succeeded)
+            {
+                ModelState.AddModelError("Message", "Parol veya mail sefdir");
+                return View(loginVm);
+
+            }
+            
 
             return RedirectToAction("Index","Home");
         }
